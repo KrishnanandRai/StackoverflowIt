@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
-import os
-import sys
-import subprocess
 
 
+def run(runfile):
+    with open(runfile,"r") as rnf:
+        exec(rnf.read())
 try:
-    subprocess.check_call(["python3 kr.py"], shell=True)
-except subprocess.CalledProcessError as e:
-    print(e)
-    exc_type, exc_obj, exc_tb = sys.exc_info()
-    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-    print(exc_type)
-    print(fname)
-    print(exc_tb.tb_lineno)
-    
+    run('kr.py')
+except Exception as e:
+    print("printing error")
+    print(str(e))
