@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
-import os
 import sys
-import subprocess
-import urllib.request
 from google import search
 
+# fuction to run target file as code itself
+def run(runfile):
+    with open(runfile,"r") as rnf:
+        exec(rnf.read())
 try:
-    subprocess.check_call(["python3 lamb.py"], shell=True)
-    search.dosome()
+    run(sys.argv[1])
 except Exception as e:
-    print(e)
+    error_message = e.msg
 
-    to search
-    query = 'stackoverflow python' + str(sys.version_info[0]) +" " +  fname + " " +  str(exc_type) + " " 
+    # get error type
+    error_class = str(e.__class__).split()[1].strip(" <>'")
+    print(error_class)
+    print(error_message)
+
+    # query to search
+    query = 'stackoverflow python' + error_class +" " + error_message 
+
+    # search
     for j in search(query, tld="co.in", num=10, stop=1, pause=1):
         print(j)
